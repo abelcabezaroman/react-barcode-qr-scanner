@@ -1,37 +1,29 @@
-import Quagga from 'quagga';
-import { useEffect } from "react"; // ES6
-export function BarcodeScanner () {
-    const initBarcode = () => {
-        Quagga.init({
-            inputStream: {
-                name: "Live",
-                type: "LiveStream",
-                target: document.querySelector('.qr')    // Or '#yourElement' (optional)
-            },
-            decoder: {
-                readers: ["code_128_reader", "ean_reader",
-                    "ean_8_reader",
-                    "code_39_reader",
-                    "code_39_vin_reader",
-                    "codabar_reader",
-                    "upc_reader",
-                    "upc_e_reader",
-                    "i2of5_reader",
-                    "2of5_reader",
-                    "code_93_reader",]
-            }
-        }, function (err) {
-            if (err) {
-                console.log(err);
-                return
-            }
-            console.log("Initialization finished. Ready to start");
-            Quagga.start();
-        });
-        Quagga.onDetected((code) => console.log(code))
+import React from "react"; // ES6
+import QrReader from 'react-qr-scanner'
 
+const previewStyle = {
+    height: 500,
+    width: 625,
+}
+
+export function QrScanner () {
+
+    const successScan = (data) => {
+        if (data) {
+            console.log(data);
+        }
     }
-    useEffect(initBarcode, [])
-    return (<div className="qr"></div>
+
+
+    const errorScan = (err) => {
+        console.log(err);
+    }
+
+    return (
+        <QrReader
+            style={previewStyle}
+            onError={errorScan}
+            onScan={successScan}
+        />
     )
 }

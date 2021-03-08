@@ -1,12 +1,13 @@
 import Quagga from 'quagga';
 import { useEffect } from "react"; // ES6
-export function Barcode () {
+import './BarcodeScanner.scss'
+export function BarcodeScanner () {
     const initBarcode = () => {
         Quagga.init({
             inputStream: {
                 name: "Live",
                 type: "LiveStream",
-                target: document.querySelector('.qr')    // Or '#yourElement' (optional)
+                target: document.querySelector('.c-barcode-scanner')    // Or '#yourElement' (optional)
             },
             decoder: {
                 readers: ["code_128_reader", "ean_reader",
@@ -32,6 +33,6 @@ export function Barcode () {
 
     }
     useEffect(initBarcode, [])
-    return (<div className="qr"></div>
+    return (<div className="c-barcode-scanner"></div>
     )
 }
