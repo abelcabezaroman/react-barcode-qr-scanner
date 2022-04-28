@@ -10,6 +10,7 @@ export function BarcodeScanner () {
                 target: document.querySelector('.c-barcode-scanner')    // Or '#yourElement' (optional)
             },
             decoder: {
+                //Si no te funciona prueba a quitar los decoders
                 readers: ["code_128_reader", "ean_reader",
                     "ean_8_reader",
                     "code_39_reader",
